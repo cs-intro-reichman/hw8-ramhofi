@@ -22,6 +22,10 @@ public class Network {
         userCount = 3;
     }
 
+    public int getUserCount(){
+        return this.userCount;
+    }
+
     /** Finds in this network, and returns, the user that has the given name.
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
@@ -146,7 +150,7 @@ public class Network {
         for (int i = 0; i < users.length; i++) {
             result += users[i].toString();
             result += "\n";
-            
+
         }
 
        return null;
