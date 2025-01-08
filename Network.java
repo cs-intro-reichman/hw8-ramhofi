@@ -56,6 +56,9 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
+        if (name1 == null || name2 == null) {
+            return false;
+        }
        User user1 = getUser(name1);
        if (user1 == null) {
         return false;
@@ -66,13 +69,14 @@ public class Network {
         return false;
        }
 
-       String[] follows = user1.getFollows();
-       for (int i = 0; i < user1.follows.length; i++) {
-            if (user1.follows[i].equals(user2)) {
+       String[] follows = user1.getfFollows();
+       for (int i = 0; i < follows.length; i++) {
+            if (follows[i].equals(name2)) {
                 return false;
             }
        }
        return true;
+    }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
      *  the user that has the maximal mutual number of followees as the user with the given name. */
@@ -111,8 +115,10 @@ public class Network {
                 maxCount = count;
                 mostPopular = currentUser.getName();
             }
-            return mostPopular;
         }
+        return mostPopular;
+    }
+
         private int followeeCount(String name) {
             int count = 0;
 
@@ -130,14 +136,19 @@ public class Network {
             }
             return count;
         }
-    }
     
 
     
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
        //// Replace the following statement with your code
-       
+        String result = "Network:\n";
+        for (int i = 0; i < users.length; i++) {
+            result += users[i].toString();
+            result += "\n";
+            
+        }
+
        return null;
     }
 }
