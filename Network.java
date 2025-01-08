@@ -72,14 +72,16 @@ public class Network {
        if (user2 == null) {
         return false;
        }
-
+/*
        String[] follows = user1.getfFollows();
+       
        for (int i = 0; i < follows.length; i++) {
             if (follows[i].equals(name2)) {
                 return false;
             }
        }
-       return true;
+            */
+       return user1.addFollowee(name2);
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
@@ -97,10 +99,15 @@ public class Network {
             User otherUser = users[i];
 
             if (!otherUser.getName().equals(name)) {
+                int mutualFriend = currentUser.countMutual(otherUser);
                 
+                if (mutualFriend > maxMutualFollowers) {
+                    maxMutualFollowers = mutualFriend;
+                    recommendedUser = otherUser.getName();
+                }
             }
         }
-        return null;
+        return recommendedUser;
     }
 
     /** Computes and returns the name of the most popular user in this network: 
@@ -124,18 +131,16 @@ public class Network {
     }
 
         private int followeeCount(String name) {
+            if (name == null) {
+                return 0;
+            }
             int count = 0;
 
             for (int i = 0; i < userCount; i++) {
                 User currentUser = users[i];
 
-                String[] currentFollows = currentUser.getfFollows();
-
-                for (int j = 0; j < currentFollows.length; j++) {
-                    if (currentFollows[j].equals(name)) {
-                        count++;
-                        break;
-                    }
+                if (currentUser.follows(name)) {
+                    count++;
                 }
             }
             return count;
@@ -147,12 +152,12 @@ public class Network {
     public String toString() {
        //// Replace the following statement with your code
         String result = "Network:\n";
-        for (int i = 0; i < users.length; i++) {
+        for (int i = 0; i < userCount; i++) {
             result += users[i].toString();
             result += "\n";
 
         }
 
-       return null;
+       return result;
     }
 }
