@@ -105,17 +105,16 @@
     public boolean isFriendOf(User other) {
         //// Replace the following statement with your code
         boolean iFollowOther = false;
-        boolean otherFollowMe; false;
+        boolean otherFollowMe = false;
         for (int i = 0; i < this.fCount; i++) {
             if (this.follows.equals(other.name)) {
               iFollowOther = true; 
               break; 
             }
         }
-        return false;
 
         for (int j = 0; j < other.fCount; j ++) {
-            if (other.follows.equals(this.name)) {
+            if (other.follows[j].equals(this.name)) {
                 otherFollowMe = true;
                 break;
             }
